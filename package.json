@@ -1,0 +1,132 @@
+{
+	"name": "dummy-ecommerce",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"react": "^17.0.0",
+		"react-dom": "^17.0.0",
+		"react-flip-move": "^3.0.4",
+		"react-lazy-load-image-component": "^1.5.4",
+		"react-router-dom": "^6.3.0",
+		"react-scripts": "5.0.1",
+		"semantic-ui-less": "^2.4.1",
+		"semantic-ui-react": "^2.1.2",
+		"styled-components": "^5.3.5"
+	},
+	"scripts": {
+		"start": "webpack-dev-server --host 0.0.0.0 --allowed-hosts all",
+		"build": "webpack",
+		"test": "craco test",
+		"eject": "craco eject",
+		"postinstall": "ln -s ../../src/semantic-ui/theme.config node_modules/semantic-ui-less/theme.config"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest",
+			"plugin:react/jsx-runtime"
+		],
+		"rules": {
+			"max-lines": [
+				"error",
+				{
+					"max": 180
+				}
+			],
+			"max-lines-per-function": [
+				"error",
+				{
+					"max": 35
+				}
+			],
+			"max-statements": [
+				"error",
+				{
+					"max": 8
+				}
+			],
+			"indent": [
+				0,
+				"tab"
+			],
+			"quotes": [
+				2,
+				"single"
+			],
+			"comma-dangle": [
+				2,
+				"always-multiline"
+			]
+		},
+		"overrides": [
+			{
+				"files": [
+					"src/components/**",
+					"src/App*",
+					"src/views/**",
+					"*.test.js"
+				],
+				"rules": {
+					"max-lines-per-function": [
+						"error",
+						{
+							"max": 120
+						}
+					],
+					"max-statements": [
+						"error",
+						{
+							"max": 15
+						}
+					]
+				}
+			}
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@babel/core": "^7.18.2",
+		"@babel/preset-env": "^7.18.2",
+		"@babel/preset-react": "^7.17.12",
+		"@craco/craco": "^6.4.3",
+		"@semantic-ui-react/craco-less": "^2.0.2",
+		"@testing-library/jest-dom": "^5.16.4",
+		"@testing-library/react": "^12.1.2",
+		"@testing-library/user-event": "^13.5.0",
+		"babel-loader": "^8.2.5",
+		"css-loader": "^5.2.7",
+		"file-loader": "^6.2.0",
+		"less": "^4.1.3",
+		"source-map-loader": "^1.1.3",
+		"style-loader": "^2.0.0",
+		"terser-webpack-plugin": "^4.2.3",
+		"url-loader": "^4.1.1",
+		"webpack": "^5.73.0",
+		"webpack-cli": "^4.9.2",
+		"webpack-dev-server": "4.1"
+	},
+	"jest": {
+		"clearMocks": true,
+		"collectCoverageFrom": [
+			"**/*.{js,jsx}",
+			"!**/node_modules/**",
+			"!**/vendor/**"
+		],
+		"coveragePathIgnorePatterns": [
+			"<rootDir>/build/",
+			"<rootDir>/node_modules/",
+			"/vendor/"
+		]
+	}
+}
