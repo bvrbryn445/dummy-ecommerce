@@ -1,11 +1,11 @@
-const resolve = require('resolve')
+const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
-
 const { createWebpackDevConfig } = require('@craco/craco');
-
 const cracoLessConfig = require('./craco.config.js');
+
 const cracoLessWebpackConfig = createWebpackDevConfig(cracoLessConfig);
 const defaultWebpackConfig = {
+	mode: 'development',
 	entry: `${__dirname}/src/index.js`,
 	output: {
 		path: `${__dirname}/docs/build`,
@@ -15,6 +15,13 @@ const defaultWebpackConfig = {
 
 	// generate different source maps for dev and production
 	devtool: process.argv.indexOf('-p') === -1 ? 'eval-source-map' : 'source-map',
+
+	resolve: {
+		extensions: ['.ts', '.tsx', '.js', 'jsx'],
+		alias: {
+			'../../theme.config$': path.join(__dirname, '../semantic-ui/theme.config'),
+		},
+	},
 
 	module: {
 		rules: [
@@ -32,26 +39,39 @@ const defaultWebpackConfig = {
 					},
 				},
 			},
-			// {
-			// 	test: /\.js$/,
-			// 	loader: 'source-map-loader',
-			// },
+			{
+				test: /\.(js|jsx)$/,
+				loader: 'source-map-loader',
+			},
 			{
 				test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-				loader: require.resolve('url-loader'),
-				// options: {
-				// 	limit: 10000,
-				// },
+				loader: 'url-loader',
+				options: {
+					limit: 10000,
+				},
 			},
 			{
 				test: [/\.eot$/, /\.ttf$/, /\.svg$/, /\.woff$/, /\.woff2$/],
-				loader: require.resolve('file-loader'),
+				loader: 'file-loader',
 			},
 			{
-				test: /\.less$/i,
+				test: /\.less$/,
 				use: [
-					// compiles Less to CSS
-					'less-loader',
+					'style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							sourceMap: true,
+						},
+					},
+					{
+						loader: 'less-loader',
+						options: {
+							lessOptions: {
+								sourceMap: true,
+							},
+						},
+					},
 				],
 			},
 			{
@@ -90,5 +110,5 @@ const defaultWebpackConfig = {
 
 // combine both configs while the default webpack config cannot
 // allow its existing properties to be overrided by the other config obj
-const webpackConfig = Object.assign({}, cracoLessWebpackConfig, defaultWebpackConfig)
-module.export = webpackConfig;
+const webpackConfig = Object.assign({}, cracoLessWebpackConfig, defaultWebpackConfig);
+module.exports = webpackConfig;

@@ -7,7 +7,7 @@ import {
 } from './filter-options-styling';
 
 export default function PriceRange(props) {
-	const { priceRange, handleFilterKeyword } = props;
+	const { priceRange, handleItemsArranger } = props;
 	const [priceInputValue, setPriceInputValue] = useState(priceRange);
 	const formRef = useRef();
 
@@ -37,7 +37,7 @@ export default function PriceRange(props) {
 
 	const handleDropdownChange = (_, data) => {
 		const priceRangeObj = priceRangeOptions[Number(data.value)];
-		handleFilterKeyword({ value: priceRangeObj, type: 'priceRange' });
+		handleItemsArranger({ value: priceRangeObj, type: 'priceRange' });
 	}
 
 	const handleInputChange = (event, type) => {
@@ -49,7 +49,7 @@ export default function PriceRange(props) {
 		event.preventDefault();
 		const minInputValue = formRef.current[0].value;
 		const maxInputValue = formRef.current[1].value;
-		handleFilterKeyword({
+		handleItemsArranger({
 			value: { min: minInputValue, max: maxInputValue },
 			type: 'priceRange',
 		});
@@ -59,7 +59,6 @@ export default function PriceRange(props) {
 		<StyledPriceRange>
 			<Dropdown
 				text={'Price Range: '}
-				defaultValue={'1'}
 				onChange={handleDropdownChange}
 				options={dropdownOptions}
 			/>
@@ -69,12 +68,12 @@ export default function PriceRange(props) {
 			>
 				<input
 					onChange={(e) => handleInputChange(e, 'min')}
-					value={priceInputValue.min}
+					defaultValue={priceInputValue.min}
 					placeholder={'Min Price'}
 				/>
 				<input
 					onChange={(e) => handleInputChange(e, 'max')}
-					value={priceInputValue.max}
+					defaultValue={priceInputValue.max}
 					placeholder={'Max Price'}
 				/>
 				<input type='submit' style={{display: 'none' }} />

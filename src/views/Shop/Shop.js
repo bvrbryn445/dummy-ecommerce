@@ -8,20 +8,20 @@ export default function Shop(props) {
 		products,
 		addItemToCart,
 		getItemQty,
-		filterKeywords,
-		handleFilterKeyword,
+		itemsArrangerMethods,
+		handleItemsArranger,
 	} = props;
 
 	return (
 		<Container>
 			<FilterOptions
 				products={products}
-				filterKeywords={filterKeywords}
-				handleFilterKeyword={handleFilterKeyword}
+				itemsArrangerMethods={itemsArrangerMethods}
+				handleItemsArranger={handleItemsArranger}
 			/> {
 				<ProductList
 					products={products}
-					filterKeywords={filterKeywords}
+					itemsArrangerMethods={itemsArrangerMethods}
 					addItemToCart={addItemToCart}
 					getItemQty={getItemQty}
 				/>

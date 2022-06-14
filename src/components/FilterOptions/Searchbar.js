@@ -3,7 +3,7 @@ import { Icon } from 'semantic-ui-react';
 import { SearchKeywordForm } from './filter-options-styling';
 
 export default function Searchbar(props) {
-	const { searchKeyword, handleFilterKeyword } = props;
+	const { searchKeyword, handleItemsArranger } = props;
 	const [state, setState] = useState({ value: searchKeyword });
 	const handleChange = (event) => {
 		event.preventDefault();
@@ -17,7 +17,7 @@ export default function Searchbar(props) {
 
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
-		handleFilterKeyword({
+		handleItemsArranger({
 			value: state.value,
 			type: 'search',
 		});

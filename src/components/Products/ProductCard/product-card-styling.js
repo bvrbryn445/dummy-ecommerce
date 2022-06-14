@@ -11,7 +11,7 @@ const productCardStyles = `
 
 const ThumbnailStyles = `
 	height: auto;
-	max-height: 350px;
+	max-height: 300px;
 	width: fit-content;
 	max-width: 100%;
 `
@@ -36,6 +36,9 @@ export const Details = styled(StyledProductCard)`
 	width: 100%;
 	align-items: center!important;
 	height: max-content;
+	& > a {
+		text-align: center;
+	}
 	& > a:hover {
 		text-decoration: underline;
 		& > div {

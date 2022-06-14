@@ -1,30 +1,38 @@
-import { StyledMenu } from './filter-options-styling';
+import { memo } from 'react';
+
 import { capitalizeFirstLetter, removeDuplicates } from '../../js/reusableFuncs';
 
+import { StyledMenu } from './filter-options-styling';
 import ItemCategory from './ItemCategory';
 import Searchbar from './Searchbar';
 import PriceRange from './PriceRange';
+import SortByDropdown from './SortByDropdown';
+import OrderByDropdown from './OrderByDropdown';
 
-export default function FilterOptions({ products, filterKeywords, handleFilterKeyword }) {
-	const { priceRange, category, search } = filterKeywords;
+const FilterOptions = memo((props) => {
+	const { products, itemsArrangerMethods, handleItemsArranger } = props;
+	const { priceRange, category, search, orderBy, sortBy } = itemsArrangerMethods;
 
-	const resetFilterKeywords = () => {
-		const defaultFilterKeywords = {
-			...filterKeywords,
-			search: '', category: '', priceRange: { min: '', max: '' },
+	const resetItemsArrangerMethods = () => {
+		const defaultItemsArrangerMethods = {
+			search: '',
+			category: '',
+			priceRange: { min: '', max: '' },
+			orderBy: '',
 		}
-		handleFilterKeyword({ value: defaultFilterKeywords, type: '' });
+		handleItemsArranger({
+			value: defaultItemsArrangerMethods,
+			type: '',
+		});
 	}
 
-	const areFilterKeywordsEmpty = () => {
+	const areItemsArrangerMethodsEmpty = () => {
 		const { min, max } = priceRange;
-		return !category && !search && !min && !max;
+		return !category && !search && !min && !max && !orderBy;
 	}
 
 	// array of unique product categories
-	const productCategories = removeDuplicates(
-		products.map(product => product.category)
-	);
+	const productCategories = removeDuplicates(products.map(product => product.category));
 
 	const categoryOptions = productCategories.map(category => {
 		const optionText = category.includes('-')
@@ -32,36 +40,45 @@ export default function FilterOptions({ products, filterKeywords, handleFilterKe
 				.map(capitalizeFirstLetter)
 				.join(' ')
 			: capitalizeFirstLetter(category)
-
 		return {
 			value: category,
 			text: optionText,
 		}
 	});
-	
+
 	return (
 		<StyledMenu>
 			<Searchbar
 				searchKeyword={search}
-				handleFilterKeyword={handleFilterKeyword}
+				handleItemsArranger={handleItemsArranger}
 			/>
 			<ItemCategory
 				category={category}
 				categoryOptions={categoryOptions}
-				handleFilterKeyword={handleFilterKeyword}
+				handleItemsArranger={handleItemsArranger}
 			/>
 			<PriceRange
 				priceRange={priceRange}
-				handleFilterKeyword={handleFilterKeyword}
+				handleItemsArranger={handleItemsArranger}
 			/>
-			{!areFilterKeywordsEmpty() &&
+			<OrderByDropdown
+				orderBy={orderBy}
+				handleItemsArranger={handleItemsArranger}
+			/>
+			<SortByDropdown
+				sortBy={sortBy}
+				handleItemsArranger={handleItemsArranger}
+			/>
+			{!areItemsArrangerMethodsEmpty() &&
 				<button
 					className='reset-filter'
-					onClick={resetFilterKeywords}
+					onClick={resetItemsArrangerMethods}
 				>
 					Reset filter
 				</button>
 			}
 		</StyledMenu>
 	)
-}
+});
+
+export default FilterOptions;

@@ -1,9 +1,9 @@
 import { Dropdown } from 'semantic-ui-react'
 
 export default function ItemCategory(props) {
-	const { category, categoryOptions, handleFilterKeyword } = props;
+	const { category, categoryOptions, handleItemsArranger } = props;
 	const handleChange = (_, { value }) => {
-		handleFilterKeyword({ value, type: 'category' });
+		handleItemsArranger({ value, type: 'category' });
 	}
 
 	return (

@@ -3,69 +3,73 @@
 exports[`should render elements with written output 1`] = `
 <div>
   <div
-    class="ui segment sc-bczRLJ hhAjhe"
+    style="height: 100%;"
   >
-    <div>
-      <a
-        href="/product/1"
-      >
-        <span
-          class=" lazy-load-image-background opacity"
-          style="color: transparent; display: inline-block; height: auto;"
-        >
-          <img
-            alt="phone1"
-            class="sc-dkzDqf ejUabZ"
-            height="auto"
-            src="https://dummyjson.com/image/i/products/1/thumbnail.jpg"
-          />
-        </span>
-      </a>
-    </div>
     <div
-      class="ui segment sc-bczRLJ sc-gsnTZi hhAjhe eYfsyi"
+      class="ui segment sc-bczRLJ hhAjhe"
     >
-      <a
-        href="/product/1"
-      >
-        <div
-          class="ui header sc-hKMtZM ezvbUU"
+      <div>
+        <a
+          href="/product/1"
         >
-          iPhone 9 - 
-        </div>
+          <span
+            class=" lazy-load-image-background opacity"
+            style="color: transparent; display: inline-block; height: auto;"
+          >
+            <img
+              alt="phone1"
+              class="sc-dkzDqf cKdirU"
+              height="auto"
+              src="https://dummyjson.com/image/i/products/1/thumbnail.jpg"
+            />
+          </span>
+        </a>
+      </div>
+      <div
+        class="ui segment sc-bczRLJ sc-gsnTZi hhAjhe eOIndq"
+      >
+        <a
+          href="/product/1"
+        >
+          <div
+            class="ui header sc-hKMtZM ezvbUU"
+          >
+            iPhone 9 - 
+          </div>
+          <span>
+             ★ 
+            4.69
+          </span>
+        </a>
+        <h3
+          class="product-card__discount"
+        >
+          SAVE 40%
+        </h3>
         <span>
-           ★ 
-          4.69
+          <p
+            class="sc-eCYdqJ idwgtc"
+          >
+            $
+            59.99
+          </p>
+          <p
+            class="sc-jSMfEi jzdFeH"
+          >
+            $
+            99.99
+          </p>
         </span>
-      </a>
-      <h3
-        class="product-card__discount"
-      >
-        SAVE 40%
-      </h3>
-      <span>
-        <p
-          class="sc-eCYdqJ idwgtc"
+        <button
+          class="ui large button"
         >
-          $
-          59.99
-        </p>
-        <p
-          class="sc-jSMfEi jzdFeH"
-        >
-          $
-          99.99
-        </p>
-      </span>
-      <button
-        class="ui large button"
-      >
-        <i
-          aria-hidden="true"
-          class="shopping cart icon"
-        />
-        Add to cart
-      </button>
+          <i
+            aria-hidden="true"
+            class="shopping cart icon"
+          />
+          Add to cart
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -1,12 +1,15 @@
-import { useState, useCallback } from 'react';
+import { memo } from 'react';
 import { Header } from 'semantic-ui-react';
 import { StyledProductDetails } from './product-details-styling';
 
 import TopContent from './TopContent';
 import Description from './Description';
 import Price from './Price';
-import QtySelection from './QtySelection';
-import QtyCounter from './QtyCounter';
+import QuantityControl from './QuantityControl'
+
+const MemoizedTopContent = memo(TopContent);
+const MemoizedDescription = memo(Description);
+const MemoizedPrice = memo(Price);
 
 export default function ProductDetails(props) {
 	const { product, getItemQty, setCartItemQty, resetCart } = props;
@@ -21,38 +24,27 @@ export default function ProductDetails(props) {
 		stock,
 		title,
 	} = product;
-	const totalQtyFromCart = getItemQty(id);
-	const [qtyAmount, setQtyAmount] = useState(1);
-	const handleQtyAmountChange = useCallback((_, data) => {
-		setQtyAmount(Number(data.value));
-	}, []);
 
 	return (
 		<StyledProductDetails>
-			<TopContent
+			<MemoizedTopContent
 				title={title}
 				brand={brand}
 				category={category}
 				rating={rating}
 			/>
-			<Description description={description} />
-			<Price
+			<MemoizedDescription description={description} />
+			<MemoizedPrice
 				price={price}
 				discountPercentage={discountPercentage}
 			/>
 			<Header>Stock Available: {stock} </Header>
-			<QtySelection
+			<QuantityControl
+				id={id}
 				stock={stock}
-				totalQtyFromCart={totalQtyFromCart}
-				handleQtyAmountChange={handleQtyAmountChange}
-			/>
-			<QtyCounter
+				getItemQty={getItemQty}
 				setCartItemQty={setCartItemQty}
 				resetCart={resetCart}
-				totalQtyFromCart={totalQtyFromCart}
-				qtyAmount={qtyAmount}
-				stock={stock}
-				id={id}
 			/>
 		</StyledProductDetails >
 	)

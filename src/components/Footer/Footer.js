@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import { StyledFooter } from './footer-styling';
 import SocialLinks from './SocialLinks';
 import CopyrightLink from './CopyrightLink';
 
-export default function Footer() {
+const Footer = memo(() => {
 	return (
 		<StyledFooter className='App__footer'>
 			<Container>
@@ -20,4 +21,6 @@ export default function Footer() {
 			</Container>
 		</StyledFooter>
 	)
-}
+});
+
+export default Footer;

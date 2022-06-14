@@ -1,23 +1,14 @@
 import styled from 'styled-components';
 import { Menu } from 'semantic-ui-react';
-import breakpoints from '../../util/breakpoints';
-
-const { device, size } = breakpoints;
 
 export const HeaderMenu = styled(Menu)`
 list-style-type: none;
 display: flex;
-justify-content: center;
+justify-content: flex-end;
 flex-direction: row;
 align-items: center;
 background-color: transparent;
 gap: 2rem;
-@media only screen and ${device.lg} {
-	justify-content: flex-end;
-}
-@media only screen and (max-width: ${size.xs}) {
-	float: left;
-}
 `
 
 export const MenuItem = styled(Menu.Item)`

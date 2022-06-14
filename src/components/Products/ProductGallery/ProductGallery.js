@@ -45,7 +45,7 @@ function BottomGrid({ images, handleImageChange }) {
 
 const MemoizedBottomGrid = memo(BottomGrid);
 
-export default function ProductGallery({ images }) {
+function ProductGallery({ images }) {
 	const totalImages = images.length;
 	const initialState = {
 		id: totalImages,
@@ -65,3 +65,5 @@ export default function ProductGallery({ images }) {
 		</StyledProductGallery>
 	)
 }
+const MemoizedProductGallery = memo(ProductGallery);
+export default MemoizedProductGallery;

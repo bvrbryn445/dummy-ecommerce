@@ -4,8 +4,8 @@ import { Segment, Grid, Loader } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 import ProductDetails from '../../components/Products/ProductDetails';
-import ProductGallery from '../../components/Products/ProductGallery';
-import RelatedProductList from '../../components/Products/RelatedProductList';
+import MemoizedProductGallery from '../../components/Products/ProductGallery';
+import MemoizedRelatedProductList from '../../components/Products/RelatedProductList';
 import NotFound from '../NotFound';
 
 const StyledSegment = styled(Segment)`
@@ -27,7 +27,7 @@ export default function Product(props) {
 
 	// reset states if the router params changes 
 	useEffect(() => {
-		if ((!!product && !isLoading)) {
+		if ((!!product)) {
 			setIsLoading(isLoading => !isLoading);
 			setProduct(undefined);
 		}
@@ -41,7 +41,7 @@ export default function Product(props) {
 	useEffect(() => {
 		if (typeof product !== 'undefined') return;
 
-		// ensuring the products arr are fetched
+		// ensuring the products are fetched
 		const timer = setTimeout(() => {
 			const productById = getProductById(Number(id));
 			function getProductById(id) {
@@ -71,13 +71,13 @@ export default function Product(props) {
 	return (
 		<StyledSegment>
 			{(isLoading && !product) && <Loader active>Loading</Loader>}
-			{(products.length && products.length < id) && <NotFound />}
+			{(products.length < id && !isLoading) ? <NotFound /> : null}
 			{(!isLoading && product) &&
 				<>
 					<Grid container stackable>
 						<Grid.Row columns={2} only='tablet computer'>
 							<Grid.Column>
-								<ProductGallery images={product.images} />
+								<MemoizedProductGallery images={product.images} />
 							</Grid.Column>
 							<Grid.Column>
 								<ProductDetails
@@ -98,13 +98,11 @@ export default function Product(props) {
 								/>
 							</Grid.Column>
 							<Grid.Column>
-								<ProductGallery
-									images={product.images}
-								/>
+								<MemoizedProductGallery images={product.images} />
 							</Grid.Column>
 						</Grid.Row>
 					</Grid>
-					<RelatedProductList
+					<MemoizedRelatedProductList
 						products={products}
 						productCategory={product.category}
 						productId={product.id}

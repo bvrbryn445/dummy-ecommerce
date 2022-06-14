@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { Table } from 'semantic-ui-react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
@@ -34,13 +33,9 @@ export default function TableItem(props) {
 	const roundedPrice = DecimalPrecision.round(newPrice * quantity, 2);
 
 	const isQtyMoreThanStock = quantity >= stock;
-	const conditionalItemRemove = useCallback((id) => {
-		if (quantity === 1) {
-			removeItemFromCart({ targetId: id });
-		} else {
-			decrementItemQty({ targetId: id });
-		}
-	}, [quantity, removeItemFromCart, decrementItemQty]);
+	const conditionalItemRemove = (id) => {
+		quantity === 1 ? removeItemFromCart({ targetId: id }) : decrementItemQty({ targetId: id });
+	};
 
 	return (
 		<Table.Body>

@@ -5,17 +5,20 @@ export const StyledMenu = styled(Menu)`
 display: flex;
 gap: 1rem!important;
 background: transparent!important;
-padding: .5rem 1rem!important;
 flex-wrap: wrap;
 position: sticky!important;
 z-index: 10000;
 align-items: center;
-box-shadow: none!important;
+justify-content: flex-start;
 background-color: hsla(0,0%,20%,.1)!important;
+box-shadow: 0 0 5px rgba(0,0,0,.05), 2px 2px 5px rgba(0,0,0,.1);
+
+& > * {
+	padding: .5rem 1rem;
+}
 & .reset-filter {
 	background-color: transparent;
 	border: 1px solid rgba(34, 36, 38, 0.15);
-	padding: 4px 8px;
 	cursor: pointer;
 }
 & .reset-filter:hover {
@@ -34,8 +37,8 @@ position: relative;
 	border-bottom: 1px solid #4D0000;
 	width: 200px;
 	::placeholder {
-  color: #4D0000;
-  opacity: .6;
+  	color: #4D0000;
+  	opacity: .6;
 	}
 }
 & > button {

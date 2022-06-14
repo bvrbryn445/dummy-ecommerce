@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import BGImage from '../../assets/images/homepage__illustration.png';
@@ -32,7 +33,7 @@ const HeroTexts = () => (
 	</HeroTextsContainer>
 )
 
-export default function Home() {
+const Home = memo(() => {
 	return (
 		<Hero>
 			<HeroTextsContainer>
@@ -42,4 +43,6 @@ export default function Home() {
 			<HeroImage src={BGImage} />
 		</Hero>
 	)
-}
+})
+
+export default Home
